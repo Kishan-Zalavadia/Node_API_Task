@@ -33,12 +33,6 @@ const addUser = async (req, res) => {
     if (!name || !email || !password){
       return res.status(400).json({ error: 'Name,email and password are required' })
     } 
-    if (!passwordValidate(password)) {
-      return res.status(400).json({message:'Password must contain at least one uppercase letter, one lowercase letter, one number and be at least 6 characters long.' })
-    }
-    if (!emailValidate(email)) {
-      return res.status(400).json({ message: 'Invalid email' })
-    }
     const newUser = await userService.createUser(name, email, password)
     return res.status(201).json(newUser)
   } catch(error) {
@@ -66,9 +60,6 @@ const updateUser = async (req, res) => {
     const { name, email } = req.body
     if (!name || !email){
       return res.status(400).json({ error: 'Name and email are required' })
-    }  
-    if (!emailValidate(email)) {
-      return res.status(400).json({ message: 'Invalid email' })
     }
     const updatedUser = await userService.updateUser(id, name, email)
     if(updatedUser.length == 0) {
@@ -78,24 +69,6 @@ const updateUser = async (req, res) => {
   } catch(error) {
     return res.status(500).json({ error: error.message, stack: error.stack })
   }
-}
-
-// Email validation function
-function emailValidate(email){
-  const emailregex = /^[a-z0-9.!#$%&’*+/=^?_`{|}~-]+@[a-z0-9-]+\.[a-z]{2,}$/
-  if (!emailregex.test(email)) {
-    return false
-  }
-  return true
-}
-
-//Password validation function
-function passwordValidate(password){
-  const passwordregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[\w\W]{6,20}$/
-  if(!passwordregex.test(password)){
-    return false
-  }
-  return true
 }
 
 module.exports = { getAllUsers, getUserById, addUser, deleteUser, updateUser }

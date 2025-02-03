@@ -4,13 +4,13 @@ const {eq} = require('drizzle-orm')
 
 // Get all users
 const allUsers = async () => {
-  const user = await db.select().from(users);
-  return user; 
+  const users = await db.select().from(users);
+  return users; 
 }
 
 // Get a user by ID
 const getUserById = async (id) => {
-  const user = await db.select().from(users).where(eq(users.id,id));
+  const user = await db.select().from(users).where(eq(users.userId,id));
   return user
 }
 
@@ -22,13 +22,13 @@ const addUser = async (name, email, password) => {
 
 // Delete a user
 const deleteUser = async (id) => {
-  const result = db.delete(users).where(eq(users.id,id))
+  const result = db.delete(users).where(eq(users.userId,id))
   return result
 }
 
 // Update a user
 const updateUser = async (id, name, email) => {
-  const result = await db.update(users).set({name:name,email:email}).where(eq(users.id,id)).returning();
+  const result = await db.update(users).set({name:name,email:email}).where(eq(users.userId,id)).returning();
   return result
 }
 

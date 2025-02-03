@@ -64,6 +64,20 @@
       "when": 1738522110572,
       "tag": "0008_motionless_iron_fist",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1738585358950,
+      "tag": "0009_wet_vampiro",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1738585405484,
+      "tag": "0010_rare_jackal",
+      "breakpoints": true
     }
   ]
 }

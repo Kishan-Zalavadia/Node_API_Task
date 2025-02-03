@@ -22,5 +22,3 @@ export const users = pgTable("users", {
 	email: varchar({ length: 30 }).notNull(),
 	password: varchar({ length: 65 }).notNull(),
 });
-
-module.exports = {users}
