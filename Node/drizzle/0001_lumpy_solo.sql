@@ -1,1 +1,0 @@
-ALTER TABLE "name" ADD COLUMN "father_name" varchar(20);
