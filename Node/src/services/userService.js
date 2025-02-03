@@ -25,9 +25,7 @@ const deleteUser = async (id) => {
 
 // Update user by ID
 const updateUser = async (id, name, email) => {
-  // const salt = await bcrypt.genSalt();
-  // const hashedPassword = await bcrypt.hash(password, salt);
-  return await userRepo.updateUser(id, name, email)
+  return await userRepo.updateUser( id, name, email)
 }
 
-module.exports = { getAllUsers, getUser, createUser, deleteUser, updateUser }
+module.exports = { getAllUsers, getUser, createUser, deleteUser, updateUser}

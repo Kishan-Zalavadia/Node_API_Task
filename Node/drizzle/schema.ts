@@ -1,17 +1,26 @@
-import { pgTable, integer, varchar } from 'drizzle-orm/pg-core'
-import { sql } from 'drizzle-orm'
+import { pgTable, integer, varchar, serial } from "drizzle-orm/pg-core"
+import { sql } from "drizzle-orm"
 
-export const users = pgTable('users', {
-  id: integer().primaryKey().generatedByDefaultAsIdentity({
-    name: 'user_id_seq',
-    startWith: 2,
-    increment: 1,
-    minValue: 1,
-    maxValue: 2147483647,
-    cache: 1
-  }),
-  name: varchar({ length: 15 }),
-  email: varchar({ length: 30 }).notNull(),
-  password: varchar({ length: 65 }).notNull(),
-  city: varchar({ length: 20 })
-})
+
+
+export const address = pgTable("address", {
+	id: integer().primaryKey().generatedByDefaultAsIdentity({ name: "address_id_seq", startWith: 1, increment: 1, minValue: 1, maxValue: 2147483647, cache: 1 }),
+	street: varchar({ length: 30 }),
+	city: varchar({ length: 20 }),
+	state: varchar({ length: 20 }),
+});
+
+export const name = pgTable("name", {
+	id: integer().primaryKey().generatedByDefaultAsIdentity({ name: "name_id_seq", startWith: 1, increment: 1, minValue: 1, maxValue: 2147483647, cache: 1 }),
+	firstName: varchar("first_name", { length: 30 }),
+	lastName: varchar("last_name", { length: 20 }),
+});
+
+export const users = pgTable("users", {
+	id: serial().primaryKey().notNull(),
+	name: varchar({ length: 15 }),
+	email: varchar({ length: 30 }).notNull(),
+	password: varchar({ length: 65 }).notNull(),
+});
+
+module.exports = {users}

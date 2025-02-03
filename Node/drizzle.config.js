@@ -11,7 +11,7 @@
 //     }
 // })
 const dotenv = require('dotenv');
-dotenv.config();
+dotenv.config({path:'.env'});
 const { defineConfig } = require("drizzle-kit");
 
 module.exports = defineConfig({

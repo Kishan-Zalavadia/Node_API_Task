@@ -1,6 +1,6 @@
 {
-  "id": "19332896-2659-4cb3-8d41-18f66d97af69",
-  "prevId": "f15b63d3-fb69-47af-bc7d-eaf4e3516ba2",
+  "id": "ec674ddf-7e2b-4948-8ec2-57c0f82d2bfa",
+  "prevId": "52d6d5a0-9655-4521-9d3b-648c40d54c5d",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -14,11 +14,11 @@
           "primaryKey": true,
           "notNull": true,
           "identity": {
-            "type": "byDefault",
-            "name": "user_id_seq",
+            "type": "always",
+            "name": "users_id_seq",
             "schema": "public",
             "increment": "1",
-            "startWith": "2",
+            "startWith": "1",
             "minValue": "1",
             "maxValue": "2147483647",
             "cache": "1",
@@ -42,12 +42,6 @@
           "type": "varchar(65)",
           "primaryKey": false,
           "notNull": true
-        },
-        "city": {
-          "name": "city",
-          "type": "varchar(20)",
-          "primaryKey": false,
-          "notNull": false
         }
       },
       "indexes": {},
@@ -72,7 +66,7 @@
             "name": "address_id_seq",
             "schema": "public",
             "increment": "1",
-            "startWith": "2",
+            "startWith": "1",
             "minValue": "1",
             "maxValue": "2147483647",
             "cache": "1",
@@ -81,7 +75,7 @@
         },
         "street": {
           "name": "street",
-          "type": "varchar(20)",
+          "type": "varchar(30)",
           "primaryKey": false,
           "notNull": false
         },
@@ -96,10 +90,52 @@
           "type": "varchar(20)",
           "primaryKey": false,
           "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.name": {
+      "name": "name",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "byDefault",
+            "name": "name_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
-        "zip": {
-          "name": "zip",
-          "type": "varchar(10)",
+        "first_name": {
+          "name": "first_name",
+          "type": "varchar(30)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_name": {
+          "name": "last_name",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "father_name": {
+          "name": "father_name",
+          "type": "varchar(20)",
           "primaryKey": false,
           "notNull": false
         }

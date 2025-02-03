@@ -1,48 +1,35 @@
-const executeQuery = require('../config/db')
-const users = require('../db/schema/users')
+const {users} = require('../db/schema/users')
 const db = require('../db/index')
+const {eq} = require('drizzle-orm')
 
 // Get all users
 const allUsers = async () => {
-  const user = await db.select().from(users)
-  return user
+  const user = await db.select().from(users);
+  return user; 
 }
 
 // Get a user by ID
 const getUserById = async (id) => {
-  const query = 'SELECT * FROM users WHERE id = $1'
-  const user = await executeQuery(query, [id])
-  return user.rows[0]
+  const user = await db.select().from(users).where(eq(users.id,id));
+  return user
 }
 
 // Add a new user
 const addUser = async (name, email, password) => {
-  console.log(name)
-  const query =
-    'INSERT INTO users(name,email,password) VALUES ($1, $2,$3) RETURNING *'
-  const values = [name, email, password]
-  const result = await executeQuery(query, values)
-  return result.rows[0]
+  const result = await db.insert(users).values({name:name,email:email,password:password}).returning()
+  return result
 }
 
 // Delete a user
 const deleteUser = async (id) => {
-  // try {
-  const query = 'DELETE FROM users WHERE id = $1'
-  const result = await executeQuery(query, [id])
+  const result = db.delete(users).where(eq(users.id,id))
   return result
-  // } catch (error) {
-  //     throw error;
-  // }
 }
 
 // Update a user
 const updateUser = async (id, name, email) => {
-  const query =
-    'UPDATE users SET name = $1, email = $2  WHERE id = $3 RETURNING *'
-  const values = [name, email, id]
-  const result = await executeQuery(query, values)
-  return result.rows[0]
+  const result = await db.update(users).set({name:name,email:email}).where(eq(users.id,id)).returning();
+  return result
 }
 
-module.exports = { allUsers, getUserById, addUser, deleteUser, updateUser }
+module.exports = { allUsers, getUserById, addUser, deleteUser, updateUser}

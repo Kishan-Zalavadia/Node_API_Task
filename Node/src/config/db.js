@@ -1,4 +1,4 @@
-// const { drizzle } = require('drizzle-orm/node-postgres');
+// Without drizzle configuration 
 const { Pool } = require('pg')
 const dotenv = require('dotenv')
 dotenv.config({ path: '../.env' })
@@ -23,4 +23,4 @@ const executeQuery = (query, values = []) => {
   return pool.query(query, values)
 }
 
-module.exports = executeQuery
+module.exports = {executeQuery}
